@@ -7,17 +7,44 @@ import Home from './Pages/Home.jsx';
 import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
 import AuthPanel from './Components/AuthPanel.jsx';
+import Err from './Pages/err.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
-      <Navbar></Navbar>
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/login' element={<AuthPanel form='login' />} />
-        <Route path='/register' element={<AuthPanel form='register' />} />
+        <Route path='/*' element={<Err />} />
+        <Route
+          path='/'
+          element={
+            <>
+              <Navbar />
+              <Home />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path='/login'
+          element={
+            <>
+              <Navbar />
+              <AuthPanel login={true} />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path='/register'
+          element={
+            <>
+              <Navbar />
+              <AuthPanel login={false} />
+              <Footer />
+            </>
+          }
+        />
       </Routes>
-      <Footer></Footer>
     </BrowserRouter>
   </StrictMode>
 );

@@ -74,6 +74,9 @@ function Hero() {
                   <div className='max-w-md'>
                     <h1 className='mb-5 text-5xl font-bold'>{hero.name}</h1>
                     <p className='mb-5'>{hero.description}</p>
+                    <button className='btn rounded-full bg-hive px-10 border-none'>
+                      Read More
+                    </button>
                   </div>
                 </div>
               </div>
