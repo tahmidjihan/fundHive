@@ -38,19 +38,19 @@ function Home() {
           <p>Explore our most popular campaigns</p>
         </div>
         <div className='cards md:max-w-9/12 mx-auto'>
-          <div class='card w-[300px] shadow-xl bg-hive mx-auto'>
-            <figure class='px-4 pt-4'>
+          <div className='card w-[300px] shadow-xl bg-hive mx-auto'>
+            <figure className='px-4 pt-4'>
               <img
                 src='https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp'
                 alt='Shoes'
-                class='rounded-xl'
+                className='rounded-xl'
               />
             </figure>
-            <div class='card-body items-center text-center'>
-              <h2 class='card-title font-bold'>Shoes!</h2>
+            <div className='card-body items-center text-center'>
+              <h2 className='card-title font-bold'>Shoes!</h2>
               <p>If a dog chews shoes whose shoes does he choose?</p>
-              <div class='card-actions'>
-                <button class='btn bg-white text-black px-5 rounded-full'>
+              <div className='card-actions'>
+                <button className='btn bg-white text-black px-5 rounded-full'>
                   Buy Now
                 </button>
               </div>
@@ -81,6 +81,84 @@ function Home() {
               src='https://i.ibb.co.com/5KF6b50/dreamer.jpg'
               className='max-w-sm rounded-lg h-full w-full'
             />
+          </div>
+        </div>
+      </section>
+      <section className='py-20'>
+        <div className='section-header text-center py-20'>
+          <h1 className='text-5xl font-bold'>Contact Us</h1>
+          <p>You can contact us to know about us or want to work with us.</p>
+        </div>
+        <div className='flex flex-col-reverse lg:flex-row-reverse gap-10'>
+          <div className='mx-auto'>
+            <h2 className='text-3xl font-bold'>Contact Us</h2>
+            <form action='' className='flex flex-col gap-4'>
+              <input
+                type='text'
+                className='input input-bordered w-full max-w-xs'
+                placeholder='Name'
+              />
+              <input
+                type='email'
+                className='input input-bordered w-full max-w-xs'
+                placeholder='Email'
+              />
+              <textarea
+                name=''
+                id=''
+                cols='30'
+                rows='10'
+                placeholder='Message'
+                className='input input-bordered w-full max-w-xs'></textarea>
+              <button className='btn bg-hive rounded-lg max-w-xs'>
+                Submit
+              </button>
+            </form>
+          </div>
+          <div className='mx-auto max-w-md'>
+            <div className='collapse collapse-arrow bg-base-200'>
+              <input type='radio' name='my-accordion-2' defaultChecked />
+              <div className='collapse-title text-xl font-medium'>
+                What is FundHive?
+              </div>
+              <div className='collapse-content'>
+                <p>
+                  FundHive is a crowdfunding platform where you can raise funds
+                  for personal, creative, or startup projects. It connects you
+                  with a community of supporters to help turn your ideas into
+                  reality.
+                </p>
+              </div>
+            </div>
+
+            <div className='collapse collapse-arrow bg-base-200'>
+              <input type='radio' name='my-accordion-2' />
+              <div className='collapse-title text-xl font-medium'>
+                How do I start a campaign?
+              </div>
+              <div className='collapse-content'>
+                <p>
+                  Simply create an account, describe your project, set a funding
+                  goal, and share your campaign with friends and supporters. The
+                  more people you reach, the closer you get to achieving your
+                  goal!
+                </p>
+              </div>
+            </div>
+
+            <div className='collapse collapse-arrow bg-base-200'>
+              <input type='radio' name='my-accordion-2' />
+              <div className='collapse-title text-xl font-medium'>
+                Is FundHive secure?
+              </div>
+              <div className='collapse-content'>
+                <p>
+                  Yes, FundHive ensures secure transactions for both fundraisers
+                  and donors. We use industry-standard encryption to protect all
+                  sensitive information, ensuring your privacy and security.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>

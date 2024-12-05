@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Campaign() {
+function AddCampaign() {
   return (
     <>
       <div className='min-h-screen '>
@@ -18,7 +18,24 @@ function Campaign() {
                 type='email'
                 placeholder='Enter email'
                 className='input input-bordered w-full max-w-xs'
-                readOnly
+                required
+              />
+              <input
+                type='text'
+                placeholder='Enter Name'
+                className='input input-bordered w-full max-w-xs'
+                required
+              />
+              <input
+                type='text'
+                placeholder='Enter Title'
+                className='input input-bordered w-full max-w-xs'
+                required
+              />
+              <input
+                type='text'
+                placeholder='Enter Content type'
+                className='input input-bordered w-full max-w-xs'
                 required
               />
               <input
@@ -29,7 +46,26 @@ function Campaign() {
               />
               <input
                 type='number'
-                placeholder='Enter amount'
+                placeholder='Enter Minimum Donation'
+                className='input input-bordered w-full max-w-xs'
+                required
+              />
+              <input
+                type='text'
+                placeholder='Thumbnail URL'
+                className='input input-bordered w-full max-w-xs'
+                required
+              />
+
+              <input
+                type='number'
+                placeholder='Enter Goal Amount'
+                className='input input-bordered w-full max-w-xs'
+                required
+              />
+              <input
+                type='text'
+                placeholder='Enter Deadline : MM/DD/YYYY'
                 className='input input-bordered w-full max-w-xs'
                 required
               />
@@ -39,25 +75,14 @@ function Campaign() {
                 id=''
                 cols='30'
                 rows='10'
-                placeholder='Message'></textarea>
+                placeholder='Description'></textarea>
               <button className='btn bg-hive rounded-lg max-w-xs' type='submit'>
                 Submit
               </button>
             </form>
           </div>
-          <div className='py-10'>
-            <img
-              src='https://i.ibb.co.com/frzbh6B/activities-of-people-in-the-hospital-health-medical-hospital-activities-people-free-photo.jpg'
-              alt=''
-              className='w-auto md:h-96'
-            />
-            <h1 className='text-3xl font-extrabold'>Campaign 1</h1>
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Accusamus distinctio odit porro reiciendis at soluta? Accusamus
-              odio debitis vitae laborum.
-            </p>
-            <h2 className='text-xl font-bold'>Goal: $1000</h2>
+          <div>
+            <img src='https://i.ibb.co.com/wMcrHHk/campaign.png' alt='' />
           </div>
         </div>
       </div>
@@ -65,4 +90,4 @@ function Campaign() {
   );
 }
 
-export default Campaign;
+export default AddCampaign;

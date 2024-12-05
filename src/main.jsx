@@ -1,7 +1,6 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
-import App from './App.jsx';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import Home from './Pages/Home.jsx';
 import Navbar from './Components/Navbar';
@@ -11,6 +10,9 @@ import Err from './Pages/err.jsx';
 import Campaigns from './Pages/Campaigns';
 import Campaign from './Pages/Campaign.jsx';
 import MyCampaigns from './Pages/MyCampaigns.jsx';
+import MyDonations from './Pages/MyDonations.jsx';
+import AddCampaign from './Pages/UpdateCampaign.jsx';
+import UpdateCampaign from './Pages/UpdateCampaign.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -73,6 +75,36 @@ createRoot(document.getElementById('root')).render(
             <>
               <Navbar />
               <MyCampaigns />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path='/MyDonations'
+          element={
+            <>
+              <Navbar />
+              <MyDonations />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path='/addCampaign'
+          element={
+            <>
+              <Navbar />
+              <AddCampaign />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path='/UpdateCampaign/:id'
+          element={
+            <>
+              <Navbar />
+              <UpdateCampaign />
               <Footer />
             </>
           }
