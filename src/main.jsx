@@ -8,6 +8,9 @@ import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
 import AuthPanel from './Components/AuthPanel.jsx';
 import Err from './Pages/err.jsx';
+import Campaigns from './Pages/Campaigns';
+import Campaign from './Pages/Campaign.jsx';
+import MyCampaigns from './Pages/MyCampaigns.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -40,6 +43,36 @@ createRoot(document.getElementById('root')).render(
             <>
               <Navbar />
               <AuthPanel login={false} />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path='/campaigns'
+          element={
+            <>
+              <Navbar />
+              <Campaigns></Campaigns>
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path='/campaign/:id'
+          element={
+            <>
+              <Navbar />
+              <Campaign />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path='/MyCampaigns'
+          element={
+            <>
+              <Navbar />
+              <MyCampaigns />
               <Footer />
             </>
           }
