@@ -1,6 +1,9 @@
 import React from 'react';
+import { authContext } from '../AuthProvider';
 
 function Campaign() {
+  const { user } = React.useContext(authContext);
+
   return (
     <>
       <div className='min-h-screen '>
@@ -18,6 +21,15 @@ function Campaign() {
                 type='email'
                 placeholder='Enter email'
                 className='input input-bordered w-full max-w-xs'
+                value={user.email}
+                readOnly
+                required
+              />
+              <input
+                type='text'
+                placeholder='Enter name'
+                className='input input-bordered w-full max-w-xs'
+                value={user.displayName}
                 readOnly
                 required
               />

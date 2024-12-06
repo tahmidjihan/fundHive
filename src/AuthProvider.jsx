@@ -7,7 +7,7 @@ import {
   signInWithPopup,
   updateProfile,
 } from 'firebase/auth';
-
+import { toast } from 'react-toastify';
 export const authContext = createContext();
 
 function AuthProvider({ children }) {
@@ -16,21 +16,39 @@ function AuthProvider({ children }) {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
       .then((res) => setUser(res.user))
-      .catch((err) => console.log(err));
+      .then(() => {
+        toast.success('Login successful');
+      })
+      .catch(() => {
+        toast.error('Login failed');
+      });
   }
   function signUp(email, password, name, PhotoURL) {
-    createUserWithEmailAndPassword(auth, email, password).then((res) => {
-      updateProfile(auth.currentUser, {
-        displayName: name,
-        photoURL: PhotoURL,
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((res) => {
+        updateProfile(auth.currentUser, {
+          displayName: name,
+          photoURL: PhotoURL,
+        });
+        setUser(res.user);
+      })
+      .then(() => {
+        toast.success('Login successful');
+      })
+      .catch(() => {
+        toast.error('Login failed');
       });
-      setUser(res.user);
-    });
   }
   function signIn(email, password) {
-    signInWithEmailAndPassword(auth, email, password).then((res) =>
-      setUser(res.user)
-    );
+    signInWithEmailAndPassword(auth, email, password)
+      .then((res) => setUser(res.user))
+      .then(() => {
+        const success = toast.success('Login successful');
+        success();
+      })
+      .catch(() => {
+        toast.error('Login failed');
+      });
   }
   useEffect(() => {
     const Unsubscribe = auth.onAuthStateChanged((user) => {

@@ -1,14 +1,29 @@
 import React, { useContext } from 'react';
 import { authContext } from '../AuthProvider';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 
 function AuthPanel(props) {
   const { login } = props;
-  const { loginWithGoogle, signIn, signUp } = useContext(authContext);
+  const { loginWithGoogle, signIn, signUp, user } = useContext(authContext);
+  const [passErr, setPassErr] = React.useState('');
+  const navigate = useNavigate();
   function handleSubmit(e) {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
+
+    if (password.length < 6) {
+      setPassErr('at least 6 characters');
+      return;
+    } else if (!/[a-z]/.test(password)) {
+      setPassErr('at least one lowercase letter');
+      return;
+    } else if (!/[A-Z]/.test(password)) {
+      setPassErr('at least one uppercase letter');
+      return;
+    } else {
+      setPassErr('');
+    }
 
     if (login) {
       signIn(email, password);
@@ -17,6 +32,9 @@ function AuthPanel(props) {
       const PhotoURL = e.target.PhotoURL.value;
       signUp(email, password, name, PhotoURL);
     }
+  }
+  if (user) {
+    navigate('/');
   }
   return (
     <>
@@ -101,9 +119,12 @@ function AuthPanel(props) {
                   type='password'
                   name='password'
                   placeholder='Enter a password'
-                  className='flex items-center w-full px-5 py-4 mb-4 mr-2 text-sm font-medium outline-none focus:bg-gray-400 placeholder:text-gray-700 bg-gray-200 text-dark-gray-900 rounded-2xl'
+                  className='flex items-center w-full px-5 py-4 mr-2 text-sm font-medium outline-none focus:bg-gray-400 placeholder:text-gray-700 bg-gray-200 text-dark-gray-900 rounded-2xl'
                   required
                 />
+                <p className='text-sm leading-tight text-red-600 mb-4 text-start'>
+                  {passErr}
+                </p>
                 <div className='flex flex-row justify-between mb-8'>
                   <a className='mr-4 text-sm font-medium text-purple-blue-500'>
                     Forget password?

@@ -8,9 +8,9 @@ import Campaigns from './Pages/Campaigns.jsx';
 import Campaign from './Pages/Campaign.jsx';
 import MyCampaigns from './Pages/MyCampaigns.jsx';
 import MyDonations from './Pages/MyDonations.jsx';
-import AddCampaign from './Pages/UpdateCampaign.jsx';
 import UpdateCampaign from './Pages/UpdateCampaign.jsx';
 import Layout from './Layout.jsx';
+import AddCampaign from './Pages/addCampaign.jsx';
 function RouteProvider() {
   return (
     <>

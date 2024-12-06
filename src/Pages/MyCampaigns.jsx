@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 function MyCampaigns() {
   return (
@@ -69,9 +70,11 @@ function MyCampaigns() {
                   <td>12/31/2024</td>
                   <td>$100,000</td>
                   <td>
-                    <button className='btn bg-hive rounded-full px-5 btn-sm'>
+                    <Link
+                      to={'/UpdateCampaign'}
+                      className='btn bg-hive rounded-full px-5 btn-sm'>
                       Update
-                    </button>
+                    </Link>
                   </td>
                   <td>
                     <button className='btn bg-hive rounded-full px-5 btn-sm'>
