@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router';
+import { authContext } from '../AuthProvider';
 
 function Navbar() {
+  const { user, logout } = useContext(authContext);
   function Menu() {
     return (
       <>
@@ -15,16 +17,31 @@ function Navbar() {
           <Link to={'/donations'}>Donations</Link>
         </li>
         <div className='lg:hidden'>
-          <li>
-            <Link to={'/login'} className='btn btn-ghost rounded-full px-5'>
-              Login
-            </Link>
-          </li>
-          <li>
-            <Link to={'/register'} className='btn rounded-full px-5'>
-              Get Started
-            </Link>
-          </li>
+          {user ? (
+            <button className=' rounded-full w-[55px] flex justify-center align-middle h-[55px] bg-white'>
+              <img
+                src={user.photoURL}
+                className='w-12 h-12 rounded-full pt-1'
+              />
+            </button>
+          ) : (
+            <div className='flex gap-5'>
+              <li>
+                <Link
+                  to={'/login'}
+                  className='btn btn-ghost rounded-full px-5 '>
+                  Login
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to={'/register'}
+                  className='btn rounded-full px-5 bg-white text-black '>
+                  Get Started
+                </Link>
+              </li>
+            </div>
+          )}
         </div>
       </>
     );
@@ -63,13 +80,35 @@ function Navbar() {
           </ul>
         </div>
         <div className='navbar-end lg:flex hidden '>
-          <Link to={'/login'} className='btn btn-ghost rounded-full px-5'>
-            Login
-          </Link>
+          {user ? (
+            <button className='relative group rounded-full flex justify-center items-center p-1 bg-white'>
+              <img src={user.photoURL} className='w-12 h-12 rounded-full' />
 
-          <Link to={'/register'} className='btn rounded-full px-5'>
-            Get Started
-          </Link>
+              <div className='absolute top-0 right-0 hidden mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg group-hover:block'>
+                <ul className='p-2'>
+                  <li className='px-4 py-2'>
+                    <span className='font-semibold'>{user.displayName}</span>
+                  </li>
+                  <li
+                    onClick={logout}
+                    className='px-4 py-2 btn bg-hive rounded-full'>
+                    Logout
+                  </li>
+                </ul>
+              </div>
+            </button>
+          ) : (
+            <div className='flex gap-5'>
+              <Link to={'/login'} className='btn btn-ghost rounded-full px-5 '>
+                Login
+              </Link>
+              <Link
+                to={'/register'}
+                className='btn rounded-full px-5 bg-white text-black '>
+                Get Started
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </>
