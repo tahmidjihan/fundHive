@@ -12,7 +12,7 @@ function Campaign() {
     if (!user) {
       navigate('/login');
     }
-  }, []);
+  }, [user, navigate]);
   const camp = useParams();
   const { id } = camp;
   const [data, setData] = React.useState([]);

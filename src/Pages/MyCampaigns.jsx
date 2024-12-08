@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { authContext } from '../AuthProvider';
 import { use } from 'react';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+import 'sweetalert2/src/sweetalert2.scss';
 
 function MyCampaigns() {
   const { user } = React.useContext(authContext);
@@ -12,7 +14,7 @@ function MyCampaigns() {
     if (!user) {
       navigate('/login');
     }
-  }, []);
+  }, [user, navigate]);
 
   const [data, setData] = React.useState([]);
   useEffect(() => {
@@ -20,6 +22,41 @@ function MyCampaigns() {
       .then((res) => res.json())
       .then((data) => setData(data));
   });
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: 'Do you want to Delete?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Save',
+      denyButtonText: `Don't save`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        fetch(`http://localhost:3000/api/campaigns/${id}`, {
+          method: 'DELETE',
+        })
+          .then(() => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Deleted Successfully',
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          })
+          .catch(() => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Something went wrong',
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          });
+      } else if (result.isDenied) {
+        Swal.fire('Campaign not deleted', '', 'info');
+      }
+    });
+  };
 
   return (
     <>
@@ -61,7 +98,9 @@ function MyCampaigns() {
                         </Link>
                       </td>
                       <td>
-                        <button className='btn bg-hive rounded-full px-5 btn-sm'>
+                        <button
+                          onClick={() => handleDelete(data._id)}
+                          className='btn bg-hive rounded-full px-5 btn-sm'>
                           Delete
                         </button>
                       </td>

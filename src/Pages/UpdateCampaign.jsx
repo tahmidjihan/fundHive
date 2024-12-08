@@ -14,7 +14,7 @@ function UpdateCampaign(props) {
     if (!user) {
       navigate('/login');
     }
-  }, []);
+  }, [user, navigate]);
   const { isUpdate } = props;
   const params = useParams();
   const [data, setData] = React.useState([]);

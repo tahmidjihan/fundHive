@@ -33,7 +33,7 @@ function Home() {
                 startups, FundHive empowers everyone to fund their dreams and
                 make an impact. Together, we build a hive of possibilities.
               </p>
-              <button className='btn bg-hive rounded-full px-20'>
+              <button className='btn bg-hive rounded-full px-20 text-black hover:bg-orange-400'>
                 Read More
               </button>
             </div>
@@ -58,13 +58,13 @@ function Home() {
                       className='rounded-xl'
                     />
                   </figure>
-                  <div className='card-body items-center text-center'>
+                  <div className='card-body items-center text-center text-black'>
                     <h2 className='card-title font-bold'>{card.title}</h2>
                     <p>{card.description}</p>
                     <div className='card-actions'>
                       <Link
                         to={`/campaign/${card._id}`}
-                        className='btn bg-white text-black px-5 rounded-full'>
+                        className='btn bg-white text-black px-5 rounded-full border-none hover:text-white hover:bg-gray-700'>
                         Buy Now
                       </Link>
                     </div>
@@ -90,7 +90,7 @@ function Home() {
                 supportive community ready to back your vision. Together, we
                 turn ambitions into achievements.
               </p>
-              <button className='btn bg-hive rounded-full px-20'>
+              <button className='btn bg-hive rounded-full px-20 text-black hover:bg-orange-400'>
                 Read More
               </button>
             </div>
@@ -127,7 +127,7 @@ function Home() {
                 rows='10'
                 placeholder='Message'
                 className='input input-bordered w-full max-w-xs'></textarea>
-              <button className='btn bg-hive rounded-lg max-w-xs'>
+              <button className='btn bg-hive rounded-lg max-w-xs text-black hover:bg-orange-400'>
                 Submit
               </button>
             </form>
