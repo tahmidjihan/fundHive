@@ -14,6 +14,12 @@ function Campaigns() {
       .then((res) => res.json())
       .then((res) => setData(res));
   }, []);
+
+  const handleSortData = () => {
+    const sortedData = [...data].sort((a, b) => a.minDonation - b.minDonation);
+    setData(sortedData);
+    console.log(data);
+  };
   return (
     <>
       {loading ? (
@@ -28,6 +34,11 @@ function Campaigns() {
               Raise funds for personal needs, creative ideas, or innovative
               startups with a community that believes in you
             </p>
+            <button
+              onClick={handleSortData}
+              className='btn mt-4 bg-hive text-black hover:bg-hive font-bold mb-4 rounded-full px-10'>
+              Sort by price
+            </button>
           </div>
           <div>
             <div className='overflow-x-auto  lg:w-8/12 mx-auto'>
@@ -38,6 +49,7 @@ function Campaigns() {
                     <th></th>
                     <th>Name</th>
                     <th>Deadline</th>
+                    <th>Min Amount</th>
                     <th>See More</th>
                   </tr>
                 </thead>
@@ -48,6 +60,7 @@ function Campaigns() {
                         <th>{i + 1}</th>
                         <td>{data.title}</td>
                         <td>{data.deadline}</td>
+                        <td>{data.minDonation}</td>
                         <td>
                           <Link
                             to={`/campaign/${data._id}`}
