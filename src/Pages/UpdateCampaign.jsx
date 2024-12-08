@@ -10,6 +10,7 @@ function UpdateCampaign(props) {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (user === undefined) return;
     if (!user) {
       navigate('/login');
     }

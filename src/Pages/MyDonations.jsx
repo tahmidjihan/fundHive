@@ -1,6 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { authContext } from '../AuthProvider';
+import { Link, useNavigate } from 'react-router';
 
 function MyDonations() {
+  const { user } = React.useContext(authContext);
+  const navigate = useNavigate();
+  const [data, setData] = React.useState([]);
+  useEffect(() => {
+    if (user === undefined) return;
+    if (!user) {
+      navigate('/login');
+      return;
+    }
+    fetch(`http://localhost:3000/api/donations/by/email/${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => setData(data));
+  }, [user, navigate]);
   return (
     <>
       <div className='min-h-screen'>
@@ -18,45 +33,28 @@ function MyDonations() {
               <thead>
                 <tr>
                   <th></th>
-                  <th>Name</th>
+                  <th>Title</th>
                   <th>Donated</th>
                   <th>See More</th>
                 </tr>
               </thead>
               <tbody>
-                {/* row 1 */}
-                <tr>
-                  <th>1</th>
-                  <td>Cy Ganderton</td>
-                  <td>$20</td>
-                  <td>
-                    <button className='btn text-black bg-hive btn-sm'>
-                      see more
-                    </button>
-                  </td>
-                </tr>
-                {/* row 2 */}
-                <tr>
-                  <th>2</th>
-                  <td>Hart Hagerty</td>
-                  <td>$32</td>
-                  <td>
-                    <button className='btn text-black bg-hive btn-sm'>
-                      see more
-                    </button>
-                  </td>
-                </tr>
-                {/* row 3 */}
-                <tr>
-                  <th>3</th>
-                  <td>Brice Swyre</td>
-                  <td>$15</td>
-                  <td>
-                    <button className='btn text-black bg-hive btn-sm'>
-                      see more
-                    </button>
-                  </td>
-                </tr>
+                {data.map((item, i) => {
+                  return (
+                    <tr key={item._id}>
+                      <th>{i + 1}</th>
+                      <td>{item.details.title}</td>
+                      <td>{item.details.amount}</td>
+                      <td>
+                        <Link
+                          to={`/campaign/${item._id}`}
+                          className='btn text-black bg-hive btn-sm'>
+                          see more
+                        </Link>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>

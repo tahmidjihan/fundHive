@@ -26,16 +26,17 @@ function AuthProvider({ children }) {
   function signUp(email, password, name, PhotoURL) {
     createUserWithEmailAndPassword(auth, email, password)
       .then((res) => {
-        updateProfile(auth.currentUser, {
+        return updateProfile(auth.currentUser, {
           displayName: name,
           photoURL: PhotoURL,
         });
-        setUser(res.user);
       })
-      .then(() => {
+      .then((res) => {
+        setUser(res.user);
         toast.success('Login successful');
       })
-      .catch(() => {
+      .catch((err) => {
+        console.error('ERROR: ', err);
         toast.error('Login failed');
       });
   }

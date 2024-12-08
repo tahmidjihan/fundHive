@@ -8,6 +8,7 @@ function Campaign() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (user === undefined) return;
     if (!user) {
       navigate('/login');
     }
@@ -64,6 +65,7 @@ function Campaign() {
               <input
                 type='email'
                 placeholder='Enter email'
+                name='email'
                 className='input input-bordered w-full max-w-xs'
                 defaultValue={user?.email}
                 readOnly
@@ -72,6 +74,7 @@ function Campaign() {
               <input
                 type='text'
                 placeholder='Enter name'
+                name='name'
                 className='input input-bordered w-full max-w-xs'
                 defaultValue={user?.displayName}
                 readOnly
@@ -80,11 +83,13 @@ function Campaign() {
               <input
                 type='number'
                 placeholder='Enter Phone Number'
+                name='phone'
                 className='input input-bordered w-full max-w-xs'
                 required
               />
               <input
                 type='number'
+                name='amount'
                 placeholder='Enter amount'
                 className='input input-bordered w-full max-w-xs'
                 required

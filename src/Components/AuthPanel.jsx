@@ -33,9 +33,11 @@ function AuthPanel(props) {
       signUp(email, password, name, PhotoURL);
     }
   }
-  if (user) {
-    navigate('/');
-  }
+  React.useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [user]);
   return (
     <>
       <div className='bg-base-200 py-20'>

@@ -31,7 +31,7 @@ function Navbar() {
             <button className='relative group rounded-full flex justify-center items-center p-1 bg-white'>
               <img src={user.photoURL} className='w-12 h-12 rounded-full' />
 
-              <div className='absolute top-0 left-0 hidden mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg group-hover:block'>
+              <div className='absolute z-[100] top-0 left-0 hidden mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg group-hover:block'>
                 <ul className='p-2'>
                   <li className='px-4 py-2'>
                     <span className='font-semibold'>{user.displayName}</span>
@@ -104,7 +104,7 @@ function Navbar() {
             <button className='relative group rounded-full flex justify-center items-center p-1 bg-white'>
               <img src={user.photoURL} className='w-12 h-12 rounded-full' />
 
-              <div className='absolute top-0 right-0 hidden mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg group-hover:block'>
+              <div className='absolute z-[100] top-0 right-0 hidden mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg group-hover:block'>
                 <ul className='p-2'>
                   <li className='px-4 py-2'>
                     <span className='font-semibold'>{user.displayName}</span>
