@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { authContext } from '../AuthProvider';
 import { Link, useNavigate } from 'react-router';
+import { Tooltip } from 'react-tooltip';
 
 function AuthPanel(props) {
   const { login } = props;
@@ -134,6 +135,8 @@ function AuthPanel(props) {
                 </div>
                 <button
                   type='submit'
+                  data-tooltip-id='my-tooltip'
+                  data-tooltip-content='Login / Sign Up Now!'
                   className=' bg-hive w-full px-6 py-5 mb-5 text-sm font-bold leading-none text-black transition duration-300 md:w-96 rounded-2xl hover:bg-purple-blue-600 focus:ring-4 focus:ring-purple-blue-100 bg-purple-blue-500'>
                   {login ? 'Login' : 'Sign Up'}
                 </button>
@@ -152,6 +155,7 @@ function AuthPanel(props) {
           </div>
         </div>
       </div>
+      <Tooltip id='my-tooltip' />
     </>
   );
 }

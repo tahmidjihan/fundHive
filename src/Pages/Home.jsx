@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import Navbar from './../Components/Navbar';
 import Footer from './../Components/Footer';
 import Hero from './../Components/Hero';
-import { Link } from 'react-router';
+import { Link, data } from 'react-router';
 import { use } from 'react';
+import { Tooltip } from 'react-tooltip';
 
 function Home() {
   const [allCards, setAllCards] = React.useState([]);
@@ -33,7 +34,10 @@ function Home() {
                 startups, FundHive empowers everyone to fund their dreams and
                 make an impact. Together, we build a hive of possibilities.
               </p>
-              <button className='btn bg-hive rounded-full px-20 text-black hover:bg-orange-400'>
+              <button
+                data-tooltip-id='my-tooltip'
+                data-tooltip-content='Read More'
+                className='btn bg-hive rounded-full px-20 text-black hover:bg-orange-400'>
                 Read More
               </button>
             </div>
@@ -52,11 +56,7 @@ function Home() {
               <div className='cards md:max-w-9/12 mx-auto' key={card._id}>
                 <div className='card w-[300px] shadow-xl bg-hive mx-auto'>
                   <figure className='px-4 pt-4'>
-                    <img
-                      src={card.thumbnail}
-                      alt='Shoes'
-                      className='rounded-xl'
-                    />
+                    <img src={card.thumbnail} className='rounded-xl' />
                   </figure>
                   <div className='card-body items-center text-center text-black'>
                     <h2 className='card-title font-bold'>{card.title}</h2>
@@ -64,8 +64,10 @@ function Home() {
                     <div className='card-actions'>
                       <Link
                         to={`/campaign/${card._id}`}
+                        data-tooltip-id='my-tooltip'
+                        data-tooltip-content='See More?'
                         className='btn bg-white text-black px-5 rounded-full border-none hover:text-white hover:bg-gray-700'>
-                        Buy Now
+                        See More
                       </Link>
                     </div>
                   </div>
@@ -127,7 +129,10 @@ function Home() {
                 rows='10'
                 placeholder='Message'
                 className='input input-bordered w-full max-w-xs'></textarea>
-              <button className='btn bg-hive rounded-lg max-w-xs text-black hover:bg-orange-400'>
+              <button
+                data-tooltip-id='my-tooltip'
+                data-tooltip-content='Submit'
+                className='btn bg-hive rounded-lg max-w-xs text-black hover:bg-orange-400'>
                 Submit
               </button>
             </form>
@@ -179,6 +184,7 @@ function Home() {
           </div>
         </div>
       </section>
+      <Tooltip id='my-tooltip' />
     </>
   );
 }

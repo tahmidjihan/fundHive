@@ -1,13 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Campaign from './Campaign';
 import { authContext } from '../AuthProvider';
 import { toast } from 'react-toastify';
 import { use } from 'react';
 import { useNavigate, useParams } from 'react-router';
+import { PropagateLoader } from 'react-spinners';
 
 function UpdateCampaign(props) {
   const { user } = React.useContext(authContext);
   const navigate = useNavigate();
+
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 3000);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     if (user === undefined) return;
@@ -68,128 +75,138 @@ function UpdateCampaign(props) {
   };
   return (
     <>
-      <div className='min-h-screen '>
-        <div className='flex align-middle w-9/12 mx-auto flex-col-reverse lg:flex-row gap-20 justify-around'>
-          <div className='text-start my-10'>
-            <h1 className='text-5xl font-extrabold'>
-              {isUpdate ? 'Update Campaign' : 'Create a Campaign'}
-            </h1>
-            <p className='max-w-md'>
-              Donate on people need, creative ideas, or innovative startups with
-              a community that believes in you. Donation can help someone
-              overcome challenges, bring innovative ideas to life, or support a
-              dream that might otherwise remain unfulfilled.
-            </p>
-            <form onSubmit={handleUpdate} className='flex flex-col gap-4 mt-10'>
-              <input
-                type='email'
-                placeholder='Enter email'
-                name='email'
-                readOnly
-                defaultValue={user?.email}
-                className='input input-bordered w-full max-w-xs'
-                required
-              />
-              <input
-                type='text'
-                placeholder='Enter Name'
-                name='name'
-                readOnly
-                defaultValue={user?.displayName}
-                className='input input-bordered w-full max-w-xs'
-                required
-              />
-              <input
-                type='text'
-                placeholder='Enter Title'
-                defaultValue={data?.title}
-                name='title'
-                className='input input-bordered w-full max-w-xs'
-                required
-              />
-              <select
-                name='contentType'
-                value={data?.contentType}
-                required
-                className='select select-bordered w-full max-w-xs'>
-                <option value='Personal Causes'>Personal Causes</option>
-                <option value='Community Causes'>Community Causes</option>
-                <option value='Global Causes'>Global Causes</option>
-                <option value='Business and Innovation'>
-                  Business and Innovation
-                </option>
-                <option value='Advocacy and Awareness'>
-                  Advocacy and Awareness
-                </option>
-                <option value='Charity'>Charity</option>
-                <option value='Other'>Other</option>
-              </select>
+      {loading ? (
+        <div className='flex items-center justify-center h-screen'>
+          <PropagateLoader color='#de9b00' size={25} />
+        </div>
+      ) : (
+        <div className='min-h-screen '>
+          <div className='flex align-middle w-9/12 mx-auto flex-col-reverse lg:flex-row gap-20 justify-around'>
+            <div className='text-start my-10'>
+              <h1 className='text-5xl font-extrabold'>
+                {isUpdate ? 'Update Campaign' : 'Create a Campaign'}
+              </h1>
+              <p className='max-w-md'>
+                Donate on people need, creative ideas, or innovative startups
+                with a community that believes in you. Donation can help someone
+                overcome challenges, bring innovative ideas to life, or support
+                a dream that might otherwise remain unfulfilled.
+              </p>
+              <form
+                onSubmit={handleUpdate}
+                className='flex flex-col gap-4 mt-10'>
+                <input
+                  type='email'
+                  placeholder='Enter email'
+                  name='email'
+                  readOnly
+                  defaultValue={user?.email}
+                  className='input input-bordered w-full max-w-xs'
+                  required
+                />
+                <input
+                  type='text'
+                  placeholder='Enter Name'
+                  name='name'
+                  readOnly
+                  defaultValue={user?.displayName}
+                  className='input input-bordered w-full max-w-xs'
+                  required
+                />
+                <input
+                  type='text'
+                  placeholder='Enter Title'
+                  defaultValue={data?.title}
+                  name='title'
+                  className='input input-bordered w-full max-w-xs'
+                  required
+                />
+                <select
+                  name='contentType'
+                  value={data?.contentType}
+                  required
+                  className='select select-bordered w-full max-w-xs'>
+                  <option value='Personal Causes'>Personal Causes</option>
+                  <option value='Community Causes'>Community Causes</option>
+                  <option value='Global Causes'>Global Causes</option>
+                  <option value='Business and Innovation'>
+                    Business and Innovation
+                  </option>
+                  <option value='Advocacy and Awareness'>
+                    Advocacy and Awareness
+                  </option>
+                  <option value='Charity'>Charity</option>
+                  <option value='Other'>Other</option>
+                </select>
 
-              <input
-                type='number'
-                placeholder='Enter Phone Number'
-                defaultValue={data?.phone}
-                name='phone'
-                className='input input-bordered w-full max-w-xs'
-                required
-              />
-              <input
-                type='number'
-                placeholder='Enter Minimum Donation'
-                name='minDonation'
-                defaultValue={data?.minDonation}
-                className='input input-bordered w-full max-w-xs'
-                required
-              />
-              <input
-                type='text'
-                placeholder='Thumbnail URL'
-                name='thumbnail'
-                defaultValue={data?.thumbnail}
-                className='input input-bordered w-full max-w-xs'
-                required
-              />
+                <input
+                  type='number'
+                  placeholder='Enter Phone Number'
+                  defaultValue={data?.phone}
+                  name='phone'
+                  className='input input-bordered w-full max-w-xs'
+                  required
+                />
+                <input
+                  type='number'
+                  placeholder='Enter Minimum Donation'
+                  name='minDonation'
+                  defaultValue={data?.minDonation}
+                  className='input input-bordered w-full max-w-xs'
+                  required
+                />
+                <input
+                  type='text'
+                  placeholder='Thumbnail URL'
+                  name='thumbnail'
+                  defaultValue={data?.thumbnail}
+                  className='input input-bordered w-full max-w-xs'
+                  required
+                />
 
-              <input
-                type='number'
-                placeholder='Enter Goal Amount'
-                name='goalAmount'
-                defaultValue={data?.goalAmount}
-                className='input input-bordered w-full max-w-xs'
-                required
+                <input
+                  type='number'
+                  placeholder='Enter Goal Amount'
+                  name='goalAmount'
+                  defaultValue={data?.goalAmount}
+                  className='input input-bordered w-full max-w-xs'
+                  required
+                />
+                <input
+                  type='text'
+                  placeholder='Enter Deadline : YYYY/MM/DD'
+                  name='deadline'
+                  defaultValue={data?.deadline}
+                  className='input input-bordered w-full max-w-xs'
+                  required
+                />
+                <textarea
+                  className='textarea textarea-bordered h-24 w-full max-w-xs'
+                  cols='30'
+                  defaultValue={data?.description}
+                  rows='10'
+                  name='description'
+                  placeholder='Description'></textarea>
+                <button
+                  className='btn bg-hive rounded-lg max-w-xs'
+                  type='submit'>
+                  {isUpdate ? 'Update' : 'Create'}
+                </button>
+              </form>
+            </div>
+            <div>
+              <img
+                src={
+                  isUpdate
+                    ? 'https://i.ibb.co.com/djsJxRx/update.png'
+                    : 'https://i.ibb.co.com/wMcrHHk/campaign.png'
+                }
+                alt=''
               />
-              <input
-                type='text'
-                placeholder='Enter Deadline : YYYY/MM/DD'
-                name='deadline'
-                defaultValue={data?.deadline}
-                className='input input-bordered w-full max-w-xs'
-                required
-              />
-              <textarea
-                className='textarea textarea-bordered h-24 w-full max-w-xs'
-                cols='30'
-                defaultValue={data?.description}
-                rows='10'
-                name='description'
-                placeholder='Description'></textarea>
-              <button className='btn bg-hive rounded-lg max-w-xs' type='submit'>
-                {isUpdate ? 'Update' : 'Create'}
-              </button>
-            </form>
-          </div>
-          <div>
-            <img
-              src={
-                isUpdate
-                  ? 'https://i.ibb.co.com/djsJxRx/update.png'
-                  : 'https://i.ibb.co.com/wMcrHHk/campaign.png'
-              }
-              alt=''
-            />
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 }
