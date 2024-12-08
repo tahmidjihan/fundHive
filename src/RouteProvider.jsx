@@ -10,7 +10,6 @@ import MyCampaigns from './Pages/MyCampaigns.jsx';
 import MyDonations from './Pages/MyDonations.jsx';
 import UpdateCampaign from './Pages/UpdateCampaign.jsx';
 import Layout from './Layout.jsx';
-import AddCampaign from './Pages/addCampaign.jsx';
 function RouteProvider() {
   return (
     <>
@@ -77,7 +76,7 @@ function RouteProvider() {
             path='/addCampaign'
             element={
               <Layout>
-                <AddCampaign />
+                <UpdateCampaign isUpdate={false} />
               </Layout>
             }
           />
@@ -85,7 +84,7 @@ function RouteProvider() {
             path='/UpdateCampaign/:id'
             element={
               <Layout>
-                <UpdateCampaign />
+                <UpdateCampaign isUpdate={true} />
               </Layout>
             }
           />

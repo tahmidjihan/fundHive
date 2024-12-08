@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Link } from 'react-router';
 
 function Campaigns() {
+  const [data, setData] = React.useState([]);
+  useEffect(() => {
+    fetch('http://localhost:3000/api/campaigns')
+      .then((res) => res.json())
+      .then((res) => setData(res));
+  }, []);
   return (
     <>
       <div className='min-h-screen'>
@@ -19,44 +26,27 @@ function Campaigns() {
                 <tr>
                   <th></th>
                   <th>Name</th>
-                  <th>Job</th>
+                  <th>Deadline</th>
                   <th>See More</th>
                 </tr>
               </thead>
               <tbody>
-                {/* row 1 */}
-                <tr>
-                  <th>1</th>
-                  <td>Cy Ganderton</td>
-                  <td>Quality Control Specialist</td>
-                  <td>
-                    <button className='btn text-black bg-hive btn-sm'>
-                      see more
-                    </button>
-                  </td>
-                </tr>
-                {/* row 2 */}
-                <tr>
-                  <th>2</th>
-                  <td>Hart Hagerty</td>
-                  <td>Desktop Support Technician</td>
-                  <td>
-                    <button className='btn text-black bg-hive btn-sm'>
-                      see more
-                    </button>
-                  </td>
-                </tr>
-                {/* row 3 */}
-                <tr>
-                  <th>3</th>
-                  <td>Brice Swyre</td>
-                  <td>Tax Accountant</td>
-                  <td>
-                    <button className='btn text-black bg-hive btn-sm'>
-                      see more
-                    </button>
-                  </td>
-                </tr>
+                {data.map((data, i) => {
+                  return (
+                    <tr key={data._id}>
+                      <th>{i + 1}</th>
+                      <td>{data.title}</td>
+                      <td>{data.deadline}</td>
+                      <td>
+                        <Link
+                          to={`/campaign/${data._id}`}
+                          className='btn btn-sm bg-hive font-bold'>
+                          See More
+                        </Link>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>

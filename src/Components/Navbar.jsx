@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router';
 import { authContext } from '../AuthProvider';
-import AddCampaign from './../Pages/addCampaign';
 
 function Navbar() {
   const { user, logout } = useContext(authContext);

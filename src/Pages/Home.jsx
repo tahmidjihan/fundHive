@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from './../Components/Navbar';
 import Footer from './../Components/Footer';
 import Hero from './../Components/Hero';
+import { Link } from 'react-router';
+import { use } from 'react';
 
 function Home() {
+  const [allCards, setAllCards] = React.useState([]);
+  useEffect(() => {
+    fetch('http://localhost:3000/api/campaigns/q/6')
+      .then((res) => res.json())
+      .then((res) => setAllCards(res));
+  }, []);
+
   return (
     <>
       <Hero></Hero>
@@ -37,25 +46,33 @@ function Home() {
           <h1 className='font-extrabold text-4xl'>Featured Campaigns</h1>
           <p>Explore our most popular campaigns</p>
         </div>
-        <div className='cards md:max-w-9/12 mx-auto'>
-          <div className='card w-[300px] shadow-xl bg-hive mx-auto'>
-            <figure className='px-4 pt-4'>
-              <img
-                src='https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp'
-                alt='Shoes'
-                className='rounded-xl'
-              />
-            </figure>
-            <div className='card-body items-center text-center'>
-              <h2 className='card-title font-bold'>Shoes!</h2>
-              <p>If a dog chews shoes whose shoes does he choose?</p>
-              <div className='card-actions'>
-                <button className='btn bg-white text-black px-5 rounded-full'>
-                  Buy Now
-                </button>
+        <div className='cards-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
+          {allCards.map((card) => {
+            return (
+              <div className='cards md:max-w-9/12 mx-auto' key={card._id}>
+                <div className='card w-[300px] shadow-xl bg-hive mx-auto'>
+                  <figure className='px-4 pt-4'>
+                    <img
+                      src={card.thumbnail}
+                      alt='Shoes'
+                      className='rounded-xl'
+                    />
+                  </figure>
+                  <div className='card-body items-center text-center'>
+                    <h2 className='card-title font-bold'>{card.title}</h2>
+                    <p>{card.description}</p>
+                    <div className='card-actions'>
+                      <Link
+                        to={`/campaign/${card._id}`}
+                        className='btn bg-white text-black px-5 rounded-full'>
+                        Buy Now
+                      </Link>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
       </section>
       <hr className='border-b-2 border-t-0 py-10 mx-10 md:mx-32 ' />

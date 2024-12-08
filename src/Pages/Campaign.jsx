@@ -1,12 +1,53 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { authContext } from '../AuthProvider';
+import { useNavigate, useParams } from 'react-router';
+import { toast } from 'react-toastify';
 
 function Campaign() {
   const { user } = React.useContext(authContext);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!user) {
+      navigate('/login');
+    }
+  }, []);
+  const camp = useParams();
+  const { id } = camp;
+  const [data, setData] = React.useState([]);
+  useEffect(() => {
+    fetch(`http://localhost:3000/api/campaigns/${id}`)
+      .then((res) => res.json())
+      .then((data) => setData(data[0]));
+  }, []);
+  console.log(data);
+  function handleDonation(e) {
+    e.preventDefault();
+    const formdata = new FormData(e.target);
+    const postData = {
+      email: formdata.get('email'),
+      name: formdata.get('name'),
+      details: {
+        title: data?.title,
+        phone: formdata.get('phone'),
+        amount: formdata.get('amount'),
+        id: data?._id,
+      },
+    };
+    fetch(`http://localhost:3000/api/donations`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(postData),
+    })
+      .then(() => toast.success('Task successful'))
+      .catch(() => toast.error('Task failed'));
+    console.log(data);
+  }
   return (
     <>
-      <div className='min-h-screen '>
+      <div className='min-h-screen ' key={data._id}>
         <div className='flex align-middle w-9/12 mx-auto flex-col-reverse lg:flex-row gap-20 justify-around'>
           <div className='text-start my-10'>
             <h1 className='text-5xl font-extrabold'>Donate Now!</h1>
@@ -16,12 +57,15 @@ function Campaign() {
               overcome challenges, bring innovative ideas to life, or support a
               dream that might otherwise remain unfulfilled.
             </p>
-            <form action='' className='flex flex-col gap-4 mt-10'>
+            <form
+              action=''
+              className='flex flex-col gap-4 mt-10'
+              onSubmit={handleDonation}>
               <input
                 type='email'
                 placeholder='Enter email'
                 className='input input-bordered w-full max-w-xs'
-                value={user.email}
+                defaultValue={user?.email}
                 readOnly
                 required
               />
@@ -29,7 +73,7 @@ function Campaign() {
                 type='text'
                 placeholder='Enter name'
                 className='input input-bordered w-full max-w-xs'
-                value={user.displayName}
+                defaultValue={user?.displayName}
                 readOnly
                 required
               />
@@ -45,13 +89,7 @@ function Campaign() {
                 className='input input-bordered w-full max-w-xs'
                 required
               />
-              <textarea
-                name=''
-                className='textarea textarea-bordered h-24 w-full max-w-xs'
-                id=''
-                cols='30'
-                rows='10'
-                placeholder='Message'></textarea>
+
               <button className='btn bg-hive rounded-lg max-w-xs' type='submit'>
                 Submit
               </button>
@@ -59,17 +97,15 @@ function Campaign() {
           </div>
           <div className='py-10'>
             <img
-              src='https://i.ibb.co.com/frzbh6B/activities-of-people-in-the-hospital-health-medical-hospital-activities-people-free-photo.jpg'
+              src={data?.thumbnail}
               alt=''
-              className='w-auto md:h-96'
+              className='w-auto md:h-96 rounded-xl mb-5'
             />
-            <h1 className='text-3xl font-extrabold'>Campaign 1</h1>
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Accusamus distinctio odit porro reiciendis at soluta? Accusamus
-              odio debitis vitae laborum.
-            </p>
-            <h2 className='text-xl font-bold'>Goal: $1000</h2>
+            <h1 className='text-3xl font-extrabold'>{data?.title}</h1>
+            <p>{data?.description}</p>
+            <h2 className='text-xl font-bold'>Goal:$ {data?.goalAmount}</h2>
+            <p>Please donate at least ${data?.minDonation}</p>
+            <h2 className='text-xl font-bold'>Deadline: {data?.deadline}</h2>
           </div>
         </div>
       </div>
