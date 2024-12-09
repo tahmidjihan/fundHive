@@ -10,7 +10,7 @@ function Campaigns() {
   });
   const [data, setData] = React.useState([]);
   useEffect(() => {
-    fetch('http://localhost:3000/api/campaigns')
+    fetch('https://backend-rho-fawn.vercel.app/api/campaigns')
       .then((res) => res.json())
       .then((res) => setData(res));
   }, []);

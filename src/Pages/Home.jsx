@@ -5,11 +5,12 @@ import Hero from './../Components/Hero';
 import { Link, data } from 'react-router';
 import { use } from 'react';
 import { Tooltip } from 'react-tooltip';
+import { Slide } from 'react-awesome-reveal';
 
 function Home() {
   const [allCards, setAllCards] = React.useState([]);
   useEffect(() => {
-    fetch('http://localhost:3000/api/campaigns/q/6')
+    fetch('https://backend-rho-fawn.vercel.app/api/campaigns/q/6')
       .then((res) => res.json())
       .then((res) => setAllCards(res));
   }, []);
@@ -51,7 +52,7 @@ function Home() {
           <p>Explore our most popular campaigns</p>
         </div>
         <div className='cards-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
-          {allCards.map((card) => {
+          {allCards?.map((card) => {
             return (
               <div className='cards md:max-w-9/12 mx-auto' key={card._id}>
                 <div className='card w-[300px] shadow-xl bg-hive mx-auto'>

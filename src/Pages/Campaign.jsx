@@ -25,13 +25,21 @@ function Campaign() {
   const { id } = camp;
   const [data, setData] = React.useState([]);
   useEffect(() => {
-    fetch(`http://localhost:3000/api/campaigns/${id}`)
+    fetch(`https://backend-rho-fawn.vercel.app/api/campaigns/${id}`)
       .then((res) => res.json())
       .then((data) => setData(data[0]));
   }, []);
   console.log(data);
   function handleDonation(e) {
     e.preventDefault();
+    const date = new Date();
+    const newDate = new Date(data?.deadline);
+    if (date > newDate) {
+      toast.error('Deadline passed');
+      return;
+    }
+
+    console.log(date);
     const formdata = new FormData(e.target);
     const postData = {
       email: formdata.get('email'),
@@ -43,7 +51,7 @@ function Campaign() {
         id: data?._id,
       },
     };
-    fetch(`http://localhost:3000/api/donations`, {
+    fetch(`https://backend-rho-fawn.vercel.app/api/donations`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

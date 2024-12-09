@@ -28,7 +28,7 @@ function UpdateCampaign(props) {
 
   if (isUpdate) {
     useEffect(() => {
-      fetch(`http://localhost:3000/api/campaigns/${params.id}`)
+      fetch(`https://backend-rho-fawn.vercel.app/api/campaigns/${params.id}`)
         .then((res) => res.json())
         .then((data) => setData(data[0]));
     }, []);
@@ -51,7 +51,7 @@ function UpdateCampaign(props) {
       description: formdata.get('description'),
     };
     if (isUpdate) {
-      fetch(`http://localhost:3000/api/campaigns/${params.id}`, {
+      fetch(`https://backend-rho-fawn.vercel.app/api/campaigns/${params.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ function UpdateCampaign(props) {
         .then(() => toast.success('Task successful'))
         .catch(() => toast.error('Task failed'));
     } else {
-      fetch(`http://localhost:3000/api/campaigns`, {
+      fetch(`https://backend-rho-fawn.vercel.app/api/campaigns`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

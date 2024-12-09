@@ -24,7 +24,9 @@ function MyCampaigns() {
 
   const [data, setData] = React.useState([]);
   useEffect(() => {
-    fetch(`http://localhost:3000/api/campaigns/by/email/${user?.email}/`)
+    fetch(
+      `https://backend-rho-fawn.vercel.app/api/campaigns/by/email/${user?.email}/`
+    )
       .then((res) => res.json())
       .then((data) => setData(data));
   });
@@ -39,7 +41,7 @@ function MyCampaigns() {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/api/campaigns/${id}`, {
+        fetch(`https://backend-rho-fawn.vercel.app/api/campaigns/${id}`, {
           method: 'DELETE',
         })
           .then(() => {

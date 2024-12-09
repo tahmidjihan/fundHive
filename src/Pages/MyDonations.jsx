@@ -19,7 +19,9 @@ function MyDonations() {
       navigate('/login');
       return;
     }
-    fetch(`http://localhost:3000/api/donations/by/email/${user?.email}`)
+    fetch(
+      `https://backend-rho-fawn.vercel.app/api/donations/by/email/${user?.email}`
+    )
       .then((res) => res.json())
       .then((data) => setData(data));
   }, [user, navigate]);
