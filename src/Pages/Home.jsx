@@ -5,7 +5,7 @@ import Hero from './../Components/Hero';
 import { Link, data } from 'react-router';
 import { use } from 'react';
 import { Tooltip } from 'react-tooltip';
-import { Slide } from 'react-awesome-reveal';
+import { Bounce, Fade, Zoom } from 'react-awesome-reveal';
 
 function Home() {
   const [allCards, setAllCards] = React.useState([]);
@@ -17,34 +17,38 @@ function Home() {
 
   return (
     <>
-      <Hero></Hero>
-      <section>
-        <div className='hero py-20'>
-          <div className='hero-content flex-col lg:flex-row'>
-            <img
-              src='https://i.ibb.co.com/SvsrpPC/finance.jpg'
-              className='max-w-sm rounded-lg h-full w-full'
-            />
-            <div>
-              <h1 className='text-5xl font-bold'>About Us</h1>
-              <p className='py-6'>
-                At FundHive, we believe in the power of community to bring ideas
-                to life. Our platform connects dreamers, innovators, and
-                change-makers with supporters who share their vision. Whether
-                it’s personal needs, creative projects, or groundbreaking
-                startups, FundHive empowers everyone to fund their dreams and
-                make an impact. Together, we build a hive of possibilities.
-              </p>
-              <button
-                data-tooltip-id='my-tooltip'
-                data-tooltip-content='Read More'
-                className='btn bg-hive rounded-full px-20 text-black hover:bg-orange-400'>
-                Read More
-              </button>
+      <Fade cascade triggerOnce>
+        <Hero></Hero>
+      </Fade>
+      <Bounce triggerOnce>
+        <section>
+          <div className='hero py-20'>
+            <div className='hero-content flex-col lg:flex-row'>
+              <img
+                src='https://i.ibb.co.com/SvsrpPC/finance.jpg'
+                className='max-w-sm rounded-lg h-full w-full'
+              />
+              <div>
+                <h1 className='text-5xl font-bold'>About Us</h1>
+                <p className='py-6'>
+                  At FundHive, we believe in the power of community to bring
+                  ideas to life. Our platform connects dreamers, innovators, and
+                  change-makers with supporters who share their vision. Whether
+                  it’s personal needs, creative projects, or groundbreaking
+                  startups, FundHive empowers everyone to fund their dreams and
+                  make an impact. Together, we build a hive of possibilities.
+                </p>
+                <button
+                  data-tooltip-id='my-tooltip'
+                  data-tooltip-content='Read More'
+                  className='btn bg-hive rounded-full px-20 text-black hover:bg-orange-400'>
+                  Read More
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </Bounce>
       <hr className='border-b-2 border-t-0 py-10 mx-10 md:mx-32 ' />
       <section className='py-20'>
         <div className='section-header text-center'>
@@ -52,58 +56,62 @@ function Home() {
           <p>Explore our most popular campaigns</p>
         </div>
         <div className='cards-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
-          {allCards?.map((card) => {
-            return (
-              <div className='cards md:max-w-9/12 mx-auto' key={card._id}>
-                <div className='card w-[300px] shadow-xl bg-hive mx-auto'>
-                  <figure className='px-4 pt-4'>
-                    <img src={card.thumbnail} className='rounded-xl' />
-                  </figure>
-                  <div className='card-body items-center text-center text-black'>
-                    <h2 className='card-title font-bold'>{card.title}</h2>
-                    <p>{card.description}</p>
-                    <div className='card-actions'>
-                      <Link
-                        to={`/campaign/${card._id}`}
-                        data-tooltip-id='my-tooltip'
-                        data-tooltip-content='See More?'
-                        className='btn bg-white text-black px-5 rounded-full border-none hover:text-white hover:bg-gray-700'>
-                        See More
-                      </Link>
+          <Zoom cascade cascadeDuration={1000} triggerOnce>
+            {allCards?.map((card) => {
+              return (
+                <div className='cards md:max-w-9/12 mx-auto' key={card._id}>
+                  <div className='card w-[300px] shadow-xl bg-hive mx-auto'>
+                    <figure className='px-4 pt-4'>
+                      <img src={card.thumbnail} className='rounded-xl' />
+                    </figure>
+                    <div className='card-body items-center text-center text-black'>
+                      <h2 className='card-title font-bold'>{card.title}</h2>
+                      <p>{card.description}</p>
+                      <div className='card-actions'>
+                        <Link
+                          to={`/campaign/${card._id}`}
+                          data-tooltip-id='my-tooltip'
+                          data-tooltip-content='See More?'
+                          className='btn bg-white text-black px-5 rounded-full border-none hover:text-white hover:bg-gray-700'>
+                          See More
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </Zoom>
         </div>
       </section>
       <hr className='border-b-2 border-t-0 py-10 mx-10 md:mx-32 ' />
-      <section>
-        <div className='hero py-20'>
-          <div className='hero-content flex-col lg:flex-row'>
-            <div>
-              <h1 className='text-5xl font-bold'>
-                Turn Dreams into Reality with FundHive
-              </h1>
-              <p className='py-6'>
-                At FundHive, we’re more than a crowdfunding platform—we’re a
-                launchpad for aspirations. Whether you're creating, innovating,
-                or overcoming personal challenges, FundHive connects you with a
-                supportive community ready to back your vision. Together, we
-                turn ambitions into achievements.
-              </p>
-              <button className='btn bg-hive rounded-full px-20 text-black hover:bg-orange-400'>
-                Read More
-              </button>
+      <Fade cascade triggerOnce>
+        <section>
+          <div className='hero py-20'>
+            <div className='hero-content flex-col lg:flex-row'>
+              <div>
+                <h1 className='text-5xl font-bold'>
+                  Turn Dreams into Reality with FundHive
+                </h1>
+                <p className='py-6'>
+                  At FundHive, we’re more than a crowdfunding platform—we’re a
+                  launchpad for aspirations. Whether you're creating,
+                  innovating, or overcoming personal challenges, FundHive
+                  connects you with a supportive community ready to back your
+                  vision. Together, we turn ambitions into achievements.
+                </p>
+                <button className='btn bg-hive rounded-full px-20 text-black hover:bg-orange-400'>
+                  Read More
+                </button>
+              </div>
+              <img
+                src='https://i.ibb.co.com/5KF6b50/dreamer.jpg'
+                className='max-w-sm rounded-lg h-full w-full'
+              />
             </div>
-            <img
-              src='https://i.ibb.co.com/5KF6b50/dreamer.jpg'
-              className='max-w-sm rounded-lg h-full w-full'
-            />
           </div>
-        </div>
-      </section>
+        </section>
+      </Fade>
       <section className='py-20'>
         <div className='section-header text-center py-20'>
           <h1 className='text-5xl font-bold'>Contact Us</h1>

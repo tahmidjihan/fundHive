@@ -28,3 +28,4 @@ FundHive is a dynamic crowdfunding platform that enables users to raise money fo
 - react tooltip
 - react tostify
 - react spinners
+- react awesome reveal
