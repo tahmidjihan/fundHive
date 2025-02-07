@@ -8,7 +8,7 @@
 
 **FundHive** is a dynamic crowdfunding platform that empowers users to raise funds for personal, creative, and startup projects. Whether it's medical expenses, launching a new product, or supporting an art initiative, FundHive connects you with a generous community of backers ready to support your vision.
 
-🔗 **[Live Project](#)**
+🔗 **[Live Project](https://fund-hive.web.app/)**
 
 ## ✨ Features
 
