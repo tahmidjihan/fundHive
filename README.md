@@ -72,7 +72,7 @@
 4. **Run the Development Server:**
 
    ```sh
-   npm start
+   npm run dev
    ```
 
 5. Open **http://localhost:3000/** in your browser. 🎉
