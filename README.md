@@ -1,6 +1,6 @@
 # 🚀 FundHive - Crowdfunding Platform
 
-<div align="middlen">
+<div align="middle">
 <img src="./fundhive.jpg"/>
 </div>
 
