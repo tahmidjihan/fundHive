@@ -62,7 +62,7 @@
    ```env
    VITE_API_KEY=your_one
    VITE_AUTH_DOMAIN=your_one
-   VITE_PROJECT_ID='your_one
+   VITE_PROJECT_ID=your_one
    VITE_STORAGE_BUCKET=your_one
    VITE_MESSAGING_ID=your_one
    VITE_APP_ID=your_one
