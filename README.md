@@ -77,8 +77,7 @@
 
 
 ## 📎 Resources
-
-- 🔗 **[Live Project](#)** _(Add your live project link here)_
+- 🔗 **[Live Project](https://fund-hive.web.app/)**
 - 📖 **[Firebase Docs](https://firebase.google.com/docs/)**
 - 🎨 **[Tailwind CSS Docs](https://tailwindcss.com/docs/)**
 - 🔧 **[React Router Docs](https://reactrouter.com/docs/en/v6/getting-started/overview)**
